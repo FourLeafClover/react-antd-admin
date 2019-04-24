@@ -1,0 +1,127 @@
+@import "./styles/vars.less";
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+.page-tabs-wrpper{
+  display: flex;
+  align-items: center;
+  height: 44px;
+
+  .page-tabs-btn__left, .page-tabs-btn__right, .page-tabs-btn__close{
+    display: block;
+    flex: 0 28px;
+    height: 44px;
+    line-height: 44px;
+    text-align: center;
+    background: #fff;
+    border: 1px solid @border-common-color;
+  }
+  .page-tabs{
+    flex: 1;
+    margin: 0;
+    padding: 6px 8px;
+    height: 44px;
+    list-style: none;
+    overflow: hidden;
+    border-bottom: 1px solid @border-common-color;
+    background: #FAFAFA;
+    box-shadow: inset 0 0 14px 0 rgba(0, 0, 0, 0.08);
+    li{
+      float: left;
+      margin-right: 4px;
+      &:hover a{
+        color: lighten(@primary-color, 40%);
+        &:before{
+          background: lighten(@primary-color, 40%);
+        }
+      }
+      span{
+        display: block;
+        padding: 0 12px;
+        height: 32px;
+        color: @border-common-color;
+        line-height: 32px;
+        text-decoration: none;
+        background: #fff;
+        border: 1px solid @border-common-color;
+        &:before{
+          content: '';
+          display: inline-block;
+          margin-right: 8px;
+          width: 10px;
+          height: 10px;
+          background: @border-common-color;
+          border-radius: 50%;
+        }
+        &.active{
+          color: #333;
+          &::before{
+            background: @primary-color;
+          }
+        }
+        .close{
+          padding-left: 5px;
+          color: #E2E4E8;
+          &:hover{
+            color: #333;
+          }
+        }
+      }
+    }
+  }
+
+}
+.ant-style-reset{
+  .ant-btn-primary:hover, .ant-btn-primary:focus{
+    color: #fff;
+    background-color: @high-light-color;
+    border-color: transparent;
+    text-decoration: none;
+  }
+
+  .ant-input,.ant-btn{
+    border-radius: 0;
+    height: 34px;
+  }
+  .ant-btn{
+    margin-left: 30px;  
+  }
+  .ant-input{
+    width: 155px;
+    margin-left: 8px;
+  }
+  .formInput{
+    margin-left: 40px;
+    display: inline-block;
+  }
+  .ant-calendar-picker-input{
+    width:200px;
+  }
+}
+
+.query-panel{
+  margin: 10px 0;
+  padding: 15px;
+  background: #fff;
+  box-shadow:0px 0px 3px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+}
+
+.result-panel{
+  margin: 10px 0;
+  padding: 15px;
+  background: #fff;
+  box-shadow:0px 0px 3px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+}
+
+.ant-form-item{
+  display: inline-block;
+}
+

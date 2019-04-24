@@ -8,9 +8,8 @@ export default {
       antd: true,
       dva: true,
       dynamicImport: { webpackChunkName: true },
-      title: 'umi-test',
+      title: 'react-antd-admin',
       dll: true,
-      
       routes: {
         exclude: [
           /models\//,

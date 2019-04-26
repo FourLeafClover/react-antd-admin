@@ -46,6 +46,12 @@ class AppPageTabs extends Component {
     });
   };
 
+  closeAllTabs = () => {
+    this.props.dispatch({
+      type:'app/removeAllPageTabs'
+    })
+  }
+
   render() {
     const {
       app: { pageTabs },
@@ -76,7 +82,7 @@ class AppPageTabs extends Component {
           <Icon type="right" />
         </span>
         <span className="page-tabs-btn__close">
-          <Icon type="close" />
+          <Icon type="close" onClick={this.closeAllTabs} />
         </span>
       </div>
     );

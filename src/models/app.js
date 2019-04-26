@@ -11,7 +11,7 @@ export default {
         fullPath: '/',
         menuName: '首页',
         fixed: true,
-      }
+      },
     ],
     activePageTab: null,
   },
@@ -55,6 +55,18 @@ export default {
         }
       }
     },
+    *removeAllPageTabs (param, { select, put }) {
+      const { pageTabs } = yield select(state => state.app);
+      const fixedPageTabs = pageTabs.filter(x=>x.fixed)
+      yield put({
+        type: 'updateState',
+        payload: {
+          pageTabs: fixedPageTabs,
+          activePageTab:fixedPageTabs[0]
+        }
+      })
+      yield router.push(fixedPageTabs[0].fullPath)
+    },
     *removePageTabs({ page }, { select, put }) {
       const { pageTabs, activePageTab } = yield select(state => state.app);
       let nextActivePageTab = null;
@@ -85,6 +97,6 @@ export default {
         ...state,
         ...payload,
       };
-    },
-  },
+    }
+  }
 };

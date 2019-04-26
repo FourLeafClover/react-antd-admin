@@ -7,7 +7,7 @@ const { Sider } = Layout;
 const SubMenu = Menu.SubMenu;
 class AppSider extends React.Component {
   getSubMenuList(menu) {
-    if (menu.children) {
+    if (menu.children && menu.children.length>0) {
       return (
         <SubMenu key={menu.menuName} title={<span>{menu.menuName}</span>}>
           {menu.children.map(subMenu => this.getSubMenuList(subMenu))}
@@ -15,9 +15,9 @@ class AppSider extends React.Component {
       );
     } else {
       return (
-        <Menu.Item key={menu.path}>
+        (!menu.hidden) && (<Menu.Item key={menu.path}>
           {menu.path ? <Link to={menu.path}>{menu.menuName}</Link> : <span>{menu.menuName}</span>}
-        </Menu.Item>
+        </Menu.Item>)
       );
     }
   }

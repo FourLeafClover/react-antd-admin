@@ -1,24 +1,24 @@
 const _menuTree = [
   {
-    menuName: '菜单1',
-    path: '/menu1',
+    menuName: '订单管理',
     hidden: false,
-    meta: {
-      title: '菜单1',
-      icon: 'icon-cloud-server',
-    },
+    icon: 'icon-cloud-server',
     children: [
       {
-        menuName: '页面1-1',
-        path: '/menu1/page1',
+        menuName: '订单列表',
+        path: '/order/orderlist',
         hidden: false,
         icon: 'icon-cloud-server',
       },
+      {
+        menuName: '订单详情',
+        path: '/order/orderdetail',
+        hidden: true
+      }
     ],
   },
   {
     menuName: '菜单2',
-    path: '/menu2',
     hidden: false,
     meta: {
       title: '菜单2',
@@ -31,8 +31,8 @@ const _menuTree = [
         hidden: false,
         icon: 'icon-cloud-server',
       },
-    ],
-  },
+    ]
+  }
 ];
 
 const _menuArray = [];
@@ -50,5 +50,5 @@ _menuTree.forEach(item => {
   pushChildrenMenu(item)
 })
 
-export const menuTree = _menuArray
+export const menuTree = _menuTree
 export const menuArray = _menuArray

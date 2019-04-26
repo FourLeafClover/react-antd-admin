@@ -7,12 +7,12 @@ import AppPageTabs from './components/AppPageTabs';
 const { Header, Content } = Layout;
 
 class AppLayout extends React.Component {
+
   state = {
     collapsed: false,
   };
 
   onCollapse = collapsed => {
-    console.log(collapsed);
     this.setState({ collapsed });
   };
 

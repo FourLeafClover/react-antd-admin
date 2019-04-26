@@ -1,10 +1,18 @@
 import { menuArray } from '@/config/menu';
 import { whiteList } from '../config';
-import { getFullPath, getLocationKey } from '../utils/location';
+import { getFullPath, getLocationKey, cloneMenu } from '../utils/location';
+import router from 'umi/router';
 export default {
   namespace: 'app',
   state: {
-    pageTabs: [],
+    pageTabs: [
+      {
+        key: 'home',
+        fullPath: '/',
+        menuName: '首页',
+        fixed: true,
+      }
+    ],
     activePageTab: null,
   },
   subscriptions: {
@@ -30,11 +38,12 @@ export default {
             },
           });
         } else {
-          const addPageTab = menuArray.find(x => x.path === location.pathname);
+          let addPageTab = menuArray.find(x => x.path === location.pathname);
           if (addPageTab) {
+            addPageTab = cloneMenu(addPageTab);
             addPageTab.key = getLocationKey(location);
             addPageTab.fullPath = getFullPath(location);
-            pageTabs.push(addPageTab)
+            pageTabs.push(addPageTab);
             yield put({
               type: 'updateState',
               payload: {
@@ -46,30 +55,36 @@ export default {
         }
       }
     },
-    *removePageTabs({ index }, { select, put }) {
-      const { pageTabs } = yield select(state => state.app);
-      let activePageTab = null;
-      if (index === 0) {
-        activePageTab = pageTabs[1];
+    *removePageTabs({ page }, { select, put }) {
+      const { pageTabs, activePageTab } = yield select(state => state.app);
+      let nextActivePageTab = null;
+      let index = pageTabs.findIndex(item => item.key === page.key);
+      if (activePageTab.key === page.key) {
+        if (index === 0) {
+          nextActivePageTab = pageTabs[0];
+        } else {
+          nextActivePageTab = pageTabs[index - 1];
+        }
       } else {
-        activePageTab = pageTabs[index - 1];
+        nextActivePageTab = activePageTab;
       }
       pageTabs.splice(index, 1);
       yield put({
         type: 'updateState',
         payload: {
-          activePageTab,
           pageTabs,
+          activePageTab: nextActivePageTab,
         },
       });
+      yield router.push(nextActivePageTab.fullPath);
     },
   },
   reducers: {
-    updateState (state, { payload }) {
+    updateState(state, { payload }) {
       return {
         ...state,
         ...payload,
       };
-    }
-  }
-}
+    },
+  },
+};

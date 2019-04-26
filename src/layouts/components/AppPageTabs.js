@@ -4,26 +4,52 @@ import { connect } from 'dva';
 import { Icon } from 'antd';
 
 class AppPageTabs extends Component {
-  tabClick = (item) => {
-    const { app:{ activePageTab } } = this.props;
+  tabClick = item => {
+    const {
+      app: { activePageTab },
+    } = this.props;
     if (item.key !== activePageTab.key) {
-      router.push(item.path);
+      router.push(item.fullPath);
     }
   };
 
   isActive = ({ key }) => {
-    const { app: { activePageTab } } = this.props
+    const {
+      app: { activePageTab },
+    } = this.props;
     if (activePageTab) {
       return key === activePageTab.key ? ' active' : '';
     } else {
-      return ''
+      return '';
     }
   };
 
-  render () {
+  getPageName = (item, pageTabs) => {
+    let tabs = pageTabs.filter(x => x.menuName === item.menuName);
+    if (tabs.length > 1) {
+      let index = tabs.findIndex(x => x === item);
+      if (index === 0) {
+        return item.menuName;
+      } else {
+        return `${item.menuName}_${index}`;
+      }
+    } else {
+      return item.menuName;
+    }
+  };
+
+  closeTab = (item, e) => {
+    e.stopPropagation();
+    this.props.dispatch({
+      type: 'app/removePageTabs',
+      page: item,
+    });
+  };
+
+  render() {
     const {
       app: { pageTabs },
-    } = this.props
+    } = this.props;
 
     return (
       <div className="page-tabs-wrpper">
@@ -34,8 +60,14 @@ class AppPageTabs extends Component {
           {pageTabs.map(item => (
             <li className="page-tabs__item" key={item.key} onClick={this.tabClick.bind(this, item)}>
               <span className={this.isActive(item)}>
-                {item.menuName}
-                <Icon type="close" />
+                {this.getPageName(item, pageTabs)}
+                {
+                  (!item.fixed) && <Icon
+                    type="close"
+                    className="page-close"
+                    onClick={event => this.closeTab(item, event)}
+                  />
+                }
               </span>
             </li>
           ))}

@@ -1,6 +1,7 @@
 export default {
   state: {
     comments: [],
+    date: new Date(),
   },
   reducers: {
     addComment(state, { comment }) {

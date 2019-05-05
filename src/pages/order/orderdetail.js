@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import { connect } from 'dva';
 import { Button, Timeline, Input } from 'antd';
 import CacheRouter from '../../components/common/CacheRouter';
-import { model, dispatch, getState } from '../../utils/dva';
+import { model, dispatch, getState, connect } from '../../utils/dva';
 import router from 'umi/router';
 import orderdetail from '../../manualModels/order/orderdetail';
-
+console.log('OrderDetail')
 class OrderDetail extends Component {
   
   state = {
@@ -58,4 +57,4 @@ class OrderDetail extends Component {
   }
 }
 
-export default connect(state => state)(OrderDetail);
+export default connect()(OrderDetail);

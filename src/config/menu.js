@@ -2,53 +2,50 @@ const _menuTree = [
   {
     menuName: '订单管理',
     hidden: false,
-    icon: 'icon-cloud-server',
+    icon: 'appstore',
     children: [
       {
         menuName: '订单列表',
         path: '/order/orderlist',
-        hidden: false,
-        icon: 'icon-cloud-server',
+        hidden: false
       },
       {
         menuName: '订单详情',
         path: '/order/orderdetail',
-        hidden: true
-      }
+        hidden: true,
+      },
     ],
   },
   {
     menuName: '菜单2',
     hidden: false,
-    meta: {
-      title: '菜单2',
-      icon: 'icon-cloud-server',
-    },
+    icon: 'appstore',
     children: [
       {
         menuName: '页面2-1',
         path: '/menu2/page1',
-        hidden: false,
-        icon: 'icon-cloud-server',
+        hidden: false
       },
-    ]
-  }
+    ],
+  },
 ];
 
 const _menuArray = [];
-const pushChildrenMenu = menu => {
+const pushChildrenMenu = (menu, parentNode) => {
+  if (parentNode) {
+    menu.parentNode = parentNode
+  }
   _menuArray.push(menu);
   if (menu.children) {
     menu.children.forEach(item => {
-      pushChildrenMenu(item);
+      pushChildrenMenu(item,menu);
     });
   }
 };
 
-
 _menuTree.forEach(item => {
-  pushChildrenMenu(item)
-})
+  pushChildrenMenu(item, null);
+});
 
-export const menuTree = _menuTree
-export const menuArray = _menuArray
+export const menuTree = _menuTree;
+export const menuArray = _menuArray;

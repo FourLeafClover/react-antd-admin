@@ -72,4 +72,59 @@ body {
   }
 }
 
+.ant-layout-sider-collapsed{
+  .app-logo-text{
+    display: none;
+  }
+}
+
+.app-user{
+  position: absolute;
+  right: 20px;
+  cursor: pointer;
+  .name{
+    margin-left: 10px;
+    font-weight: bold;
+  }
+  .split{
+    padding: 0 10px;
+    color: @border-common-color;
+  }
+}
+
+.app-slider-open{
+  line-height: inherit !important;
+  margin-left: 20px;
+  font-size: 20px;
+  cursor: pointer;
+  padding-top: 2px;
+}
+
+.app-header{
+  display: flex;
+  .ant-breadcrumb{
+    line-height: inherit;
+    margin-left: 20px;
+    >span:nth-of-type(1){
+      font-weight: bold  
+    }
+    >span:last-of-type{
+      font-weight: bold
+    }
+  }
+}
+
+.app-logo{
+  padding: 10px 20px;
+  color: white;
+  background: #002140;
+  font-weight: bold;
+  font-size: 18px;
+  overflow: hidden;
+  img{
+    height: 40px;
+    margin-right: 10px;
+  }
+}
+
 

@@ -1,15 +1,16 @@
 import React from 'react';
-import { Layout, Menu } from 'antd';
+import { Layout, Menu, Icon } from 'antd';
 import { connect } from 'dva';
 import { Link } from 'react-router-dom';
 import { menuTree } from '../../config/menu';
+import logo from '@/assets/logo.svg'
 const { Sider } = Layout;
 const SubMenu = Menu.SubMenu;
 class AppSider extends React.Component {
   getSubMenuList(menu) {
     if (menu.children && menu.children.length>0) {
       return (
-        <SubMenu key={menu.menuName} title={<span>{menu.menuName}</span>}>
+        <SubMenu key={menu.path} title={<span><Icon type={menu.icon} /><span>{menu.menuName}</span></span>}>
           {menu.children.map(subMenu => this.getSubMenuList(subMenu))}
         </SubMenu>
       );
@@ -22,11 +23,22 @@ class AppSider extends React.Component {
     }
   }
 
-  render() {
+  render () {
+    const selectedKeys = []
+    if (this.props.app.activePageTab) {
+      selectedKeys.push(this.props.app.activePageTab.path)
+    }
     return (
-      <Sider collapsible>
-        <div className="logo" />
-        <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
+      <Sider collapsed={this.props.collapsed} trigger={null} collapsible width={250}>
+        <div className="app-logo" >
+          <img src={logo} alt="antd" />
+          <span className="app-logo-text">Antd Admin</span>
+        </div>
+        <Menu
+          selectedKeys={selectedKeys}
+          mode="inline"
+          theme="dark"
+          inlineCollapsed={this.props.collapsed}>
           {menuTree.map(menu => this.getSubMenuList(menu))}
         </Menu>
       </Sider>

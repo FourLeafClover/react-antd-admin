@@ -1,5 +1,9 @@
 # react-antd-admin
 
+## 预览地址
+
+<a href="https://fourleafclover.github.io/antd-admin">antd-admin</a>
+
 基于UMI + Antd开启多Tab页功能
 
 <img src="https://github.com/FourLeafClover/react-antd-admin/raw/master/src/assets/images/readme1.png" />
@@ -55,3 +59,4 @@ export const dispatch = (actions) => {
 
 4. 实现模拟登陆
 5. 实现面包屑
+

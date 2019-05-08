@@ -21,10 +21,10 @@ class AppLayout extends React.Component {
 
   render() {
     return !whiteList.includes(this.props.location.pathname) ? (
-      <Layout style={{ minHeight: '100vh' }}>
+      <Layout style={{ height: '100vh' }}>
         <AppSider collapsed={this.state.collapsed} />
         <Layout>
-          <Header className="app-header" style={{ background: '#fff', padding: 0 }}>
+          <Header className="app-header" style={{ background: '#fff',zIndex:1, padding: 0,boxShadow:'0 1px 4px rgba(0, 21, 41, 0.08)' }}>
             <Icon
               className="app-slider-open"
               type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
@@ -33,12 +33,16 @@ class AppLayout extends React.Component {
             <AppBreadcrumb />
             <AppUser />
           </Header>
-          <Content style={{ margin: '0 16px' }}>
-            <AppPageTabs />
+          <AppPageTabs />
+          <Content
+            style={{
+              height: 'calc(100vh-120px)',
+              overflow:'auto',
+              padding:12
+            }}
+          >
             <KeepAliveProvider>
-              <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
-                {this.props.children}
-              </div>
+              <div style={{ padding: 24, background: '#fff' }}>{this.props.children}</div>
             </KeepAliveProvider>
           </Content>
         </Layout>

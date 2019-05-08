@@ -36,12 +36,12 @@ class AppBreadcrumb extends Component {
         <Breadcrumb.Item>
           <Link to="/">首页</Link>
         </Breadcrumb.Item>
-        {breads.map(item => {
+        {breads.map((item,index)=> {
           if (!item.fullPath) {
-            return <Breadcrumb.Item>{item.menuName}</Breadcrumb.Item>;
+            return <Breadcrumb.Item key={index}>{item.menuName}</Breadcrumb.Item>;
           } else {
             return (
-              <Breadcrumb.Item>
+              <Breadcrumb.Item key={index}>
                 <Link to={item.fullPath}>{item.menuName}</Link>
               </Breadcrumb.Item>
             );

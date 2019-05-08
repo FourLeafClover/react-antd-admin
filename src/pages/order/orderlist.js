@@ -38,7 +38,7 @@ class OrderList extends Component {
     return (
       <CacheRouter>
         <div>
-          <Table dataSource={orderList} columns={this.columns} />
+          <Table dataSource={orderList} columns={this.columns} rowKey='id' />
         </div>
       </CacheRouter>
     );
